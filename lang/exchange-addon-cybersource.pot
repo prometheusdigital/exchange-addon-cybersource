@@ -1,0 +1,583 @@
+# Translation of   by .
+# Copyright (C) 2013
+# This file is distributed under the same license as the  package.
+# Chris Jean <support@ithemes.com>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/exchange-addon-paypal-pro\n"
+"POT-Creation-Date: 2013-08-15 09:16-0500\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Chris Jean <support@ithemes.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: exchange-addon-paypal-pro.php:30 lib/addon-settings.php:212
+msgid "PayPal Pro"
+msgstr ""
+
+#: exchange-addon-paypal-pro.php:31
+msgid "Process transactions via PayPal Pro, a simple and elegant payment gateway."
+msgstr ""
+
+#: lib/addon-functions.php:21
+msgid "Setup Add-on"
+msgstr ""
+
+#: lib/addon-functions.php:39
+msgid "Processing payment, please wait..."
+msgstr ""
+
+#: lib/addon-settings.php:82
+msgid "Purchase"
+msgstr ""
+
+#: lib/addon-settings.php:182
+msgid "PayPal Pro Settings"
+msgstr ""
+
+#: lib/addon-settings.php:191
+msgid "Save Changes"
+msgstr ""
+
+#: lib/addon-settings.php:216
+msgid ""
+"To get PayPal Pro set up for use with Exchange, you'll need to add the following "
+"information from your PayPal Pro account."
+msgstr ""
+
+#: lib/addon-settings.php:218
+msgid "Video:"
+msgstr ""
+
+#: lib/addon-settings.php:218
+msgid "Setting Up PayPal Pro in Exchange"
+msgstr ""
+
+#: lib/addon-settings.php:221
+msgid "Don't have a PayPal Pro account yet?"
+msgstr ""
+
+#: lib/addon-settings.php:221
+msgid "Go set one up here"
+msgstr ""
+
+#: lib/addon-settings.php:222
+msgid ""
+"Enabling PayPal Pro limits your currency options to United States Dollars and "
+"Canadian Dollars."
+msgstr ""
+
+#: lib/addon-settings.php:226
+#, php-format
+msgid ""
+"You are currently using a currency that is not supported by PayPal Pro. <a href="
+"\"%s\">Please update your currency settings</a>."
+msgstr ""
+
+#: lib/addon-settings.php:228
+msgid "Step 1. Fill out your PayPal Pro API Credentials"
+msgstr ""
+
+#: lib/addon-settings.php:230
+msgid "Live Secret Key"
+msgstr ""
+
+#: lib/addon-settings.php:230
+msgid ""
+"The PayPal Pro Live Secret Key is available in your PayPal Pro Dashboard (Your "
+"Account &rarr; Account Settings &rarr; API Keys)."
+msgstr ""
+
+#: lib/addon-settings.php:234
+msgid "Live Publishable Key"
+msgstr ""
+
+#: lib/addon-settings.php:234
+msgid ""
+"The PayPal Pro Live Publishable Key is available in your PayPal Pro Dashboard (Your "
+"Account &rarr; Account Settings &rarr; API Keys)."
+msgstr ""
+
+#: lib/addon-settings.php:238
+msgid "Step 2. Setup PayPal Pro Webhooks"
+msgstr ""
+
+#: lib/addon-settings.php:239
+#, php-format
+msgid ""
+"Webhooks can be configured in the %sWebhook Settings%s section of the PayPal Pro "
+"dashboard. Click \"Add URL\" to reveal a form to add a new URL for receiving "
+"webhooks."
+msgstr ""
+
+#: lib/addon-settings.php:240
+msgid ""
+"Please log in to your account and add this URL to your Webhooks so iThemes "
+"Exchange is notified of things like refunds, payments, etc."
+msgstr ""
+
+#: lib/addon-settings.php:243
+msgid "Optional: Edit Purchase Button Label"
+msgstr ""
+
+#: lib/addon-settings.php:245
+msgid "Purchase Button Label"
+msgstr ""
+
+#: lib/addon-settings.php:245
+msgid ""
+"This is the text inside the button your customers will press to purchase "
+"with PayPal Pro"
+msgstr ""
+
+#: lib/addon-settings.php:249
+msgid "Optional: Enable PayPal Pro Test Mode"
+msgstr ""
+
+#: lib/addon-settings.php:252
+msgid "Enable PayPal Pro Test Mode?"
+msgstr ""
+
+#: lib/addon-settings.php:252
+msgid ""
+"Use this mode for testing your store. This mode will need to be disabled "
+"when the store is ready to process customer payments."
+msgstr ""
+
+#: lib/addon-settings.php:256
+msgid "Test Secret Key"
+msgstr ""
+
+#: lib/addon-settings.php:256
+msgid ""
+"The PayPal Pro Test Secret Key is available in your PayPal Pro Dashboard (Your "
+"Account &rarr; Account Settings &rarr; API Keys)."
+msgstr ""
+
+#: lib/addon-settings.php:260
+msgid "Test Publishable Key"
+msgstr ""
+
+#: lib/addon-settings.php:260
+msgid ""
+"The PayPal Pro Test Publishable Key is available in your PayPal Pro Dashboard (Your "
+"Account &rarr; Account Settings &rarr; API Keys)."
+msgstr ""
+
+#: lib/addon-settings.php:279
+msgid "Error. Please try again"
+msgstr ""
+
+#: lib/addon-settings.php:285
+msgid "Settings saved."
+msgstr ""
+
+#: lib/addon-settings.php:290
+msgid "Settings not saved."
+msgstr ""
+
+#: lib/addon-settings.php:325
+msgid "Settings Saved."
+msgstr ""
+
+#: lib/addon-settings.php:343
+msgid "Please include your PayPal Pro Live Secret Key"
+msgstr ""
+
+#: lib/addon-settings.php:345
+msgid "Please include your PayPal Pro Live Publishable Key"
+msgstr ""
+
+#: lib/addon-settings.php:349
+msgid "Please include your PayPal Pro Test Secret Key"
+msgstr ""
+
+#: lib/addon-settings.php:351
+msgid "Please include your PayPal Pro Test Publishable Key"
+msgstr ""
+
+#: lib/addon-settings.php:365
+msgid "United States dollar"
+msgstr ""
+
+#: lib/addon-settings.php:366
+msgid "Canadian dollar"
+msgstr ""
+
+#: lib/addon-settings.php:367
+msgid "British pound"
+msgstr ""
+
+#: lib/addon-settings.php:368
+msgid "European Euro"
+msgstr ""
+
+#: lib/required-hooks.php:50
+msgid "Transaction Failed, unable to verify security token."
+msgstr ""
+
+#: lib/required-hooks.php:110
+msgid "Unknown error. Please try again later."
+msgstr ""
+
+#: lib/required-hooks.php:192
+msgid "Paid"
+msgstr ""
+
+#: lib/required-hooks.php:194
+msgid "Refunded"
+msgstr ""
+
+#: lib/required-hooks.php:196
+msgid "Partially Refunded"
+msgstr ""
+
+#: lib/required-hooks.php:198
+msgid "Disputed: PayPal Pro needs a response"
+msgstr ""
+
+#: lib/required-hooks.php:200
+msgid "Disputed: Under review"
+msgstr ""
+
+#: lib/required-hooks.php:202
+msgid "Disputed: Won, Paid"
+msgstr ""
+
+#: lib/required-hooks.php:204
+msgid "Unknown"
+msgstr ""
+
+#: lib/updater/information.php:50
+msgid "These details will be available soon."
+msgstr ""
+
+#: lib/updater/init.php:223
+msgid ""
+"To receive automatic updates for %l, use the <a href=\"%s\">iThemes "
+"Licensing</a> page found in the Settings menu."
+msgstr ""
+
+#: lib/updater/init.php:234 lib/updater/init.php:240
+#: lib/updater/settings-page.php:286
+msgid "iThemes Licensing"
+msgstr ""
+
+#: lib/updater/init.php:308
+msgid "Manage iThemes product licenses to receive automatic upgrade support"
+msgstr ""
+
+#: lib/updater/init.php:308
+msgid "License"
+msgstr ""
+
+#: lib/updater/server.php:127
+#, php-format
+msgid ""
+"An error occurred when communicating with the iThemes update server: %s (%s)"
+msgstr ""
+
+#: lib/updater/settings-page.php:71
+msgid ""
+"Incorrect password. Please make sure that you are supplying your iThemes "
+"membership username and password details."
+msgstr ""
+
+#: lib/updater/settings-page.php:75
+msgid ""
+"Invalid username. Please make sure that you are supplying your iThemes "
+"membership username and password details."
+msgstr ""
+
+#: lib/updater/settings-page.php:78
+#, php-format
+msgid ""
+"The licensing server reports that the %1$s (%2$s) product is unknown. Please "
+"contact support for assistance."
+msgstr ""
+
+#: lib/updater/settings-page.php:81
+#, php-format
+msgid ""
+"%1$s could not be licensed since the membership account is out of available "
+"licenses for this product. You can unlicense the product on other sites or "
+"upgrade your membership to one with a higher number of licenses in order to "
+"increase the amount of available licenses."
+msgstr ""
+
+#: lib/updater/settings-page.php:84
+#, php-format
+msgid ""
+"%s could not be licensed due to an internal error. Please try to license %s "
+"again at a later time. If this problem continues, please contact iThemes "
+"support."
+msgstr ""
+
+#: lib/updater/settings-page.php:90
+#, php-format
+msgid ""
+"An unknown error relating to the %1$s product occurred. Please contact "
+"iThemes support. Error details: %2$s"
+msgstr ""
+
+#: lib/updater/settings-page.php:92
+#, php-format
+msgid ""
+"An unknown error occurred. Please contact iThemes support. Error details: %s"
+msgstr ""
+
+#: lib/updater/settings-page.php:118
+msgid "Settings saved"
+msgstr ""
+
+#: lib/updater/settings-page.php:125
+msgid ""
+"You must supply an iThemes membership username and password in order to "
+"license products."
+msgstr ""
+
+#: lib/updater/settings-page.php:127
+msgid ""
+"You must supply an iThemes membership username in order to license products."
+msgstr ""
+
+#: lib/updater/settings-page.php:129
+msgid ""
+"You must supply an iThemes membership password in order to license products."
+msgstr ""
+
+#: lib/updater/settings-page.php:131
+msgid ""
+"You must select at least one product to license. Ensure that you select the "
+"products that you wish to license in the listing below."
+msgstr ""
+
+#: lib/updater/settings-page.php:146
+msgid ""
+"An unknown server error occurred. Please try to license your products again "
+"at another time."
+msgstr ""
+
+#: lib/updater/settings-page.php:166
+msgid "Your product subscription has expired"
+msgstr ""
+
+#: lib/updater/settings-page.php:173
+msgid "Successfully licensed %l."
+msgstr ""
+
+#: lib/updater/settings-page.php:177 lib/updater/settings-page.php:182
+#, php-format
+msgid "Unable to license %1$s. Reason: %2$s"
+msgstr ""
+
+#: lib/updater/settings-page.php:190
+msgid ""
+"You must supply an iThemes membership username and password in order to "
+"remove licenses."
+msgstr ""
+
+#: lib/updater/settings-page.php:192
+msgid ""
+"You must supply an iThemes membership username in order to remove licenses."
+msgstr ""
+
+#: lib/updater/settings-page.php:194
+msgid ""
+"You must supply an iThemes membership password in order to remove licenses."
+msgstr ""
+
+#: lib/updater/settings-page.php:196
+msgid ""
+"You must select at least one license to remove. Ensure that you select the "
+"licenses that you wish to remove in the listing below."
+msgstr ""
+
+#: lib/updater/settings-page.php:211
+msgid ""
+"An unknown server error occurred. Please try to remove licenses from your "
+"products again at another time."
+msgstr ""
+
+#: lib/updater/settings-page.php:232
+msgid "Unknown server error."
+msgstr ""
+
+#: lib/updater/settings-page.php:237
+msgid "Successfully removed license from %l."
+msgid_plural "Successfully removed licenses from %l."
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/updater/settings-page.php:241
+#, php-format
+msgid "Unable to remove license from %1$s. Reason: %2$s"
+msgstr ""
+
+#: lib/updater/settings-page.php:312
+msgid "Settings"
+msgstr ""
+
+#: lib/updater/settings-page.php:318
+msgid "Licensing Page Access"
+msgstr ""
+
+#: lib/updater/settings-page.php:325
+msgid "Show this licensing page on site dashboards"
+msgstr ""
+
+#: lib/updater/settings-page.php:328
+msgid ""
+"By default, this page only shows on the network dashboard. Enable the option "
+"above in order to have this page accessible on sites as well."
+msgstr ""
+
+#: lib/updater/settings-page.php:335
+msgid "Save Settings"
+msgstr ""
+
+#: lib/updater/settings-page.php:354 lib/updater/settings-page.php:385
+#: lib/updater/settings-page.php:505 lib/updater/settings-page.php:566
+msgid "Product"
+msgstr ""
+
+#: lib/updater/settings-page.php:355 lib/updater/settings-page.php:387
+msgid "Member"
+msgstr ""
+
+#: lib/updater/settings-page.php:356 lib/updater/settings-page.php:389
+msgid "Expiration"
+msgstr ""
+
+#: lib/updater/settings-page.php:357 lib/updater/settings-page.php:390
+msgid "Remaining Licenses"
+msgstr ""
+
+#: lib/updater/settings-page.php:373
+msgid "Licensed Products"
+msgstr ""
+
+#: lib/updater/settings-page.php:379 lib/updater/settings-page.php:499
+msgid "Select All"
+msgstr ""
+
+#: lib/updater/settings-page.php:388
+msgid "Product Status"
+msgstr ""
+
+#: lib/updater/settings-page.php:398
+msgid "unlimited"
+msgstr ""
+
+#: lib/updater/settings-page.php:435 lib/updater/settings-page.php:522
+#, php-format
+msgid "Select %s"
+msgstr ""
+
+#: lib/updater/settings-page.php:455
+msgid "Remove Licenses"
+msgstr ""
+
+#: lib/updater/settings-page.php:489
+msgid "Unlicensed Products"
+msgstr ""
+
+#: lib/updater/settings-page.php:491
+msgid ""
+"The following products have not been licensed. Licensing a product gives you "
+"access to automatic updates from within WordPress."
+msgstr ""
+
+#: lib/updater/settings-page.php:492
+msgid ""
+"To license products, select the products you wish to license, enter your "
+"iThemes membership username and password, and press the License Products "
+"button."
+msgstr ""
+
+#: lib/updater/settings-page.php:493
+#, php-format
+msgid "Need help? <a href=\"%s\">Click here for a quick video tutorial</a>."
+msgstr ""
+
+#: lib/updater/settings-page.php:538
+msgid "License Products"
+msgstr ""
+
+#: lib/updater/settings-page.php:558
+msgid "Unrecognized Products"
+msgstr ""
+
+#: lib/updater/settings-page.php:560
+msgid ""
+"The following products were not recognized by the licensing system. This can "
+"be due to a bug in the product code, a temporary server issue, or because "
+"the product is no longer supported."
+msgstr ""
+
+#: lib/updater/settings-page.php:561
+#, php-format
+msgid ""
+"Please check this page again at a later time to see if the problem resolves "
+"itself. If the product remains, please contact <a href=\"%s\">iThemes "
+"support</a> and provide them with the details given below."
+msgstr ""
+
+#: lib/updater/settings-page.php:567
+msgid "Type"
+msgstr ""
+
+#: lib/updater/settings-page.php:568
+msgid "Package"
+msgstr ""
+
+#: lib/updater/settings-page.php:569
+msgid "Version"
+msgstr ""
+
+#: lib/updater/settings-page.php:570
+msgid "Server Response"
+msgstr ""
+
+#: lib/updater/settings-page.php:579
+msgid "Unknown Error"
+msgstr ""
+
+#: lib/updater/settings-page.php:612
+#, php-format
+msgid "%d day"
+msgid_plural "%d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/updater/settings-page.php:614
+#, php-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/updater/settings-page.php:616
+#, php-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/updater/settings-page.php:618
+#, php-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: lib/updater/settings-page.php:621
+#, php-format
+msgid "%s ago"
+msgstr ""
