@@ -7,7 +7,7 @@
 */
 
 /**
- * Cybersource URL to perform refunds
+ * CyberSource URL to perform refunds
  *
  * The it_exchange_refund_url_for_[addon-slug] filter is
  * used to generate the link for the 'Refund Transaction' button
@@ -24,7 +24,7 @@ function it_exchange_refund_url_for_cybersource( $url ) {
 add_filter( 'it_exchange_refund_url_for_cybersource', 'it_exchange_refund_url_for_cybersource' );
 
 /**
- * This proccesses a Cybersource transaction.
+ * This proccesses a CyberSource transaction.
  *
  * The it_exchange_do_transaction_[addon-slug] action is called when
  * the site visitor clicks a specific add-ons 'purchase' button. It is
@@ -116,7 +116,7 @@ function it_exchange_cybersource_addon_make_payment_button( $options ) {
 add_filter( 'it_exchange_get_cybersource_make_payment_button', 'it_exchange_cybersource_addon_make_payment_button', 10, 2 );
 
 /**
- * Gets the interpretted transaction status from valid Cybersource transaction statuses
+ * Gets the interpretted transaction status from valid CyberSource transaction statuses
  *
  * Most gateway transaction stati are going to be lowercase, one word strings.
  * Hooking a function to the it_exchange_transaction_status_label_[addon-slug] filter
@@ -124,7 +124,7 @@ add_filter( 'it_exchange_get_cybersource_make_payment_button', 'it_exchange_cybe
  *
  * @since 1.0.0
  *
- * @param string $status the string of the Cybersource transaction
+ * @param string $status the string of the CyberSource transaction
  * @return string translaction transaction status
 */
 function it_exchange_cybersource_addon_transaction_status_label( $status ) {
@@ -136,7 +136,7 @@ function it_exchange_cybersource_addon_transaction_status_label( $status ) {
         case 'partial-refund':
             return __( 'Partially Refunded', 'it-l10n-exchange-addon-cybersource' );
         case 'needs_response':
-            return __( 'Disputed: Cybersource needs a response', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Disputed: CyberSource needs a response', 'it-l10n-exchange-addon-cybersource' );
         case 'under_review':
             return __( 'Disputed: Under review', 'it-l10n-exchange-addon-cybersource' );
         case 'won':

@@ -8,19 +8,19 @@
 */
 
 /**
- * This is the function registered in the options array when it_exchange_register_addon was called for Cybersource
+ * This is the function registered in the options array when it_exchange_register_addon was called for CyberSource
  *
  * It tells Exchange where to find the settings page
  *
  * @return void
 */
 function it_exchange_cybersource_addon_settings_callback() {
-    $IT_Exchange_Cybersource_Add_On = new IT_Exchange_Cybersource_Add_On();
-    $IT_Exchange_Cybersource_Add_On->print_settings_page();
+    $IT_Exchange_CyberSource_Add_On = new IT_Exchange_CyberSource_Add_On();
+    $IT_Exchange_CyberSource_Add_On->print_settings_page();
 }
 
 /**
- * Outputs wizard settings for Cybersource
+ * Outputs wizard settings for CyberSource
  *
  * Exchange allows add-ons to add a small amount of settings to the wizard.
  * You can add these settings to the wizard by hooking into the following action:
@@ -33,7 +33,7 @@ function it_exchange_cybersource_addon_settings_callback() {
  * @return void
 */
 function it_exchange_print_cybersource_wizard_settings( $form ) {
-    $IT_Exchange_Cybersource_Add_On = new IT_Exchange_Cybersource_Add_On();
+    $IT_Exchange_CyberSource_Add_On = new IT_Exchange_CyberSource_Add_On();
     $settings = it_exchange_get_option( 'addon_cybersource', true );
     $form_values = ITUtility::merge_defaults( ITForm::get_post_data(), $settings );
     $hide_if_js =  it_exchange_is_addon_enabled( 'cybersource' ) ? '' : 'hide-if-js';
@@ -42,14 +42,14 @@ function it_exchange_print_cybersource_wizard_settings( $form ) {
     <?php if ( empty( $hide_if_js ) ) { ?>
         <input class="enable-cybersource" type="hidden" name="it-exchange-transaction-methods[]" value="cybersource" />
     <?php } ?>
-    <?php $IT_Exchange_Cybersource_Add_On->get_form_table( $form, $form_values ); ?>
+    <?php $IT_Exchange_CyberSource_Add_On->get_form_table( $form, $form_values ); ?>
     </div>
     <?php
 }
 add_action( 'it_exchange_print_cybersource_wizard_settings', 'it_exchange_print_cybersource_wizard_settings' );
 
 /**
- * Saves Cybersource settings when the Wizard is saved
+ * Saves CyberSource settings when the Wizard is saved
  *
  * @since 1.0.0
  *
@@ -59,13 +59,13 @@ function it_exchange_save_cybersource_wizard_settings( $errors ) {
     if ( ! empty( $errors ) )
         return $errors;
 
-    $IT_Exchange_Cybersource_Add_On = new IT_Exchange_Cybersource_Add_On();
-    return $IT_Exchange_Cybersource_Add_On->save_wizard_settings();
+    $IT_Exchange_CyberSource_Add_On = new IT_Exchange_CyberSource_Add_On();
+    return $IT_Exchange_CyberSource_Add_On->save_wizard_settings();
 }
 // add_action( 'it_exchange_save_cybersource_wizard_settings', 'it_exchange_save_cybersource_wizard_settings' );
 
 /**
- * Default settings for Cybersource
+ * Default settings for CyberSource
  *
  * @since 1.0.0
  *
@@ -74,9 +74,10 @@ function it_exchange_save_cybersource_wizard_settings( $errors ) {
 */
 function it_exchange_cybersource_addon_default_settings( $values ) {
     $defaults = array(
-        'cybersource_api_username'                => '',
-        'cybersource_api_password'                => '',
-        'cybersource_api_signature'               => '',
+        'cybersource_merchant_id'                => '',
+        'cybersource_live_security_key'                => '',
+        'cybersource_test_security_key'                => '',
+		'cybersource_sale_method'                 => 'auth_capture',
         'cybersource_sandbox_mode'                => false,
         'cybersource_purchase_button_label' => __( 'Purchase', 'it-l10n-exchange-addon-cybersource' ),
     );
@@ -86,10 +87,10 @@ function it_exchange_cybersource_addon_default_settings( $values ) {
 add_filter( 'it_storage_get_defaults_exchange_addon_cybersource', 'it_exchange_cybersource_addon_default_settings' );
 
 /**
- * Class for Cybersource
+ * Class for CyberSource
  * @since 1.0.0
 */
-class IT_Exchange_Cybersource_Add_On {
+class IT_Exchange_CyberSource_Add_On {
 
     /**
      * @var boolean $_is_admin true or false
@@ -160,7 +161,7 @@ class IT_Exchange_Cybersource_Add_On {
         ?>
         <div class="wrap">
             <?php screen_icon( 'it-exchange' ); ?>
-            <h2><?php _e( 'Cybersource Settings', 'it-l10n-exchange-addon-cybersource' ); ?></h2>
+            <h2><?php _e( 'CyberSource Settings', 'it-l10n-exchange-addon-cybersource' ); ?></h2>
 
             <?php do_action( 'it_exchange_paypa-pro_settings_page_top' ); ?>
             <?php do_action( 'it_exchange_addon_settings_page_top' ); ?>
@@ -187,43 +188,61 @@ class IT_Exchange_Cybersource_Add_On {
 
         $general_settings = it_exchange_get_option( 'settings_general' );
 
-        if ( !empty( $settings ) )
-            foreach ( $settings as $key => $var )
+        if ( !empty( $settings ) ) {
+            foreach ( $settings as $key => $var ) {
                 $form->set_option( $key, $var );
+			}
+		}
 
         if ( ! empty( $_GET['page'] ) && 'it-exchange-setup' == $_GET['page'] ) : ?>
-            <h3><?php _e( 'Cybersource', 'it-l10n-exchange-addon-cybersource' ); ?></h3>
+            <h3><?php _e( 'CyberSource', 'it-l10n-exchange-addon-cybersource' ); ?></h3>
         <?php endif; ?>
         <div class="it-exchange-addon-settings it-exchange-cybersource-addon-settings">
             <p>
-                <?php _e( 'To get Cybersource set up for use with Exchange, you\'ll need to add the following information from your Cybersource account.', 'it-l10n-exchange-addon-cybersource' ); ?>
+                <?php _e( 'To get CyberSource set up for use with Exchange, you\'ll need to add the following information from your CyberSource account.', 'it-l10n-exchange-addon-cybersource' ); ?>
             </p>
             <p>
-                <?php _e( 'Don\'t have a Cybersource account yet?', 'it-l10n-exchange-addon-cybersource' ); ?> <a href="https://www.paypal.com/webapps/mpp/paypal-payments-pro" target="_blank"><?php _e( 'Go set one up here', 'it-l10n-exchange-addon-cybersource' ); ?></a>.
+                <?php _e( 'Don\'t have a CyberSource account yet?', 'it-l10n-exchange-addon-cybersource' ); ?> <a href="https://www.paypal.com/webapps/mpp/paypal-payments-pro" target="_blank"><?php _e( 'Go set one up here', 'it-l10n-exchange-addon-cybersource' ); ?></a>.
             </p>
-            <h4><?php _e( 'Fill out your Cybersource API Credentials', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
+            <h4><?php _e( 'Fill out your CyberSource API Credentials', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
             <p>
-                <label for="cybersource_api_username"><?php _e( 'API Username', 'it-l10n-exchange-addon-cybersource' ); ?> <span class="tip" title="<?php _e( 'Your Cybersource Account Number, or SID, is found in the top-right corner of your 2CO account dashboard.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
-                <?php $form->add_text_box( 'cybersource_api_username' ); ?>
-            </p>
-            <p>
-                <label for="cybersource_api_password"><?php _e( 'API Password', 'it-l10n-exchange-addon-cybersource' ); ?> <span class="tip" title="<?php _e( 'The Cybersource API Password is found in...', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
-                <?php $form->add_password( 'cybersource_api_password' ); ?>
+                <label for="cybersource_merchant_id"><?php _e( 'API Username', 'it-l10n-exchange-addon-cybersource' ); ?>
+					<span class="tip" title="<?php _e( 'This is the same merchant ID you use to log into the CyberSource Business Center.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
+                <?php $form->add_text_box( 'cybersource_merchant_id' ); ?>
             </p>
             <p>
-                <label for="cybersource_api_signature"><?php _e( 'API Signature', 'it-l10n-exchange-addon-cybersource' ); ?> <span class="tip" title="<?php _e( 'The Cybersource API Password is found in...', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
-                <?php $form->add_password( 'cybersource_api_signature' ); ?>
+                <label for="cybersource_live_security_key"><?php _e( 'Live Transaction Security Key', 'it-l10n-exchange-addon-cybersource' ); ?>
+					<span class="tip" title="<?php _e( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
+                <?php $form->add_password( 'cybersource_live_security_key' ); ?>
+            </p>
+            <p>
+                <label for="cybersource_test_security_key"><?php _e( 'Test Transaction Security Key', 'it-l10n-exchange-addon-cybersource' ); ?>
+					<span class="tip" title="<?php _e( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
+                <?php $form->add_password( 'cybersource_test_security_key' ); ?>
+            </p>
+            <p>
+                <label for="cybersource_test_security_key"><?php _e( 'Transaction Sale Method', 'it-l10n-exchange-addon-cybersource' ); ?></label>
+				<?php
+					$sale_methods = array(
+						'auth_capture' => __( 'Authorize and Capture - Charge the Credit Card for the total amount', 'it-l10n-exchange-addon-cybersource' ),
+						'auth' => __( 'Authorize - Only authorize the Credit Card for the total amount', 'it-l10n-exchange-addon-cybersource' )
+					);
+
+					$form->add_drop_down( 'cybersource_sale_method', $sale_methods );
+				?>
             </p>
 
-            <h4 class="hide-if-wizard"><?php _e( 'Optional: Enable Cybersource Sandbox Mode', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
+            <h4 class="hide-if-wizard"><?php _e( 'Optional: Enable CyberSource Sandbox Mode', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
             <p class="hide-if-wizard">
                 <?php $form->add_check_box( 'cybersource_sandbox_mode', array( 'class' => 'show-test-mode-options' ) ); ?>
-                <label for="cybersource_sandbox_mode"><?php _e( 'Enable Cybersource Sandbox Mode?', 'it-l10n-exchange-addon-cybersource' ); ?> <span class="tip" title="<?php _e( 'Use this mode for testing your store. This mode will need to be disabled when the store is ready to process customer payments.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
+                <label for="cybersource_sandbox_mode"><?php _e( 'Enable CyberSource Sandbox Mode?', 'it-l10n-exchange-addon-cybersource' ); ?>
+					<span class="tip" title="<?php _e( 'Use this mode for testing your store. This mode will need to be disabled when the store is ready to process customer payments.', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
             </p>
 
             <h4><?php _e( 'Optional: Edit Purchase Button Label', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
             <p>
-                <label for="cybersource_purchase_button_label"><?php _e( 'Purchase Button Label', 'it-l10n-exchange-addon-cybersource' ); ?> <span class="tip" title="<?php _e( 'This is the text inside the button your customers will press to purchase with Cybersource', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
+                <label for="cybersource_purchase_button_label"><?php _e( 'Purchase Button Label', 'it-l10n-exchange-addon-cybersource' ); ?>
+					<span class="tip" title="<?php _e( 'This is the text inside the button your customers will press to purchase with CyberSource', 'it-l10n-exchange-addon-cybersource' ); ?>">i</span></label>
                 <?php $form->add_text_box( 'cybersource_purchase_button_label' ); ?>
             </p>
         </div>
@@ -267,16 +286,15 @@ class IT_Exchange_Cybersource_Add_On {
         if ( empty( $_REQUEST['it_exchange_settings-wizard-submitted'] ) )
             return;
 
-        $cybersource_settings = array();
+		$defaults = it_exchange_cybersource_addon_default_settings( array() );
+
+        $cybersource_settings = array(
+			'cybersource_sale_method' => $defaults[ 'cybersource_sale_method' ],
+			'cybersource_purchase_button_label' => $defaults[ 'cybersource_purchase_button_label' ]
+		);
 
         // Fields to save
-        $fields = array(
-            'cybersource_api_username',
-            'cybersource_api_password',
-            'cybersource_api_signature',
-            'cybersource_sandbox_mode',
-            'cybersource_purchase_button_label'
-        );
+        $fields = array_keys( $defaults );
 
         $default_wizard_cybersource_settings = apply_filters( 'default_wizard_cybersource_settings', $fields );
 
@@ -312,14 +330,15 @@ class IT_Exchange_Cybersource_Add_On {
 
         $errors = array();
 
-		if ( empty( $values['cybersource_api_username'] ) )
-            $errors[] = __( 'Please include your Cybersource API Username', 'it-l10n-exchange-addon-cybersource' );
+		if ( empty( $values['cybersource_merchant_id'] ) )
+            $errors[] = __( 'Please include your CyberSource Merchant ID', 'it-l10n-exchange-addon-cybersource' );
 
-        if ( empty( $values['cybersource_api_password'] ) )
-            $errors[] = __( 'Please include your Cybersource API Password', 'it-l10n-exchange-addon-cybersource' );
-
-        if ( empty( $values['cybersource_api_signature'] ) )
-            $errors[] = __( 'Please include your Cybersource API Signature', 'it-l10n-exchange-addon-cybersource' );
+		if ( empty( $values[ 'cybersource_live_security_key' ] ) && empty( $values[ 'cybersource_sandbox_mode' ] ) ) {
+            $errors[] = __( 'Please include your CyberSource Live Transaction Security Key', 'it-l10n-exchange-addon-cybersource' );
+		}
+		elseif ( empty( $values[ 'cybersource_test_security_key' ] ) && !empty( $values[ 'cybersource_sandbox_mode' ] ) ) {
+            $errors[] = __( 'Please include your CyberSource Test Transaction Security Key', 'it-l10n-exchange-addon-cybersource' );
+		}
 
         return $errors;
 

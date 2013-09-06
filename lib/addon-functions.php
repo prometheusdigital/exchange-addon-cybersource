@@ -1,12 +1,12 @@
 <?php
 /**
- * The following file contains utility functions specific to our Cybersource add-on
+ * The following file contains utility functions specific to our CyberSource add-on
  * If you're building your own transaction-method addon, it's likely that you will
- * need to do similar things. This includes enqueueing scripts, formatting data for Cybersource, etc.
+ * need to do similar things. This includes enqueueing scripts, formatting data for CyberSource, etc.
 */
 
 /**
- * Adds actions to the plugins page for the iThemes Exchange Cybersource plugin
+ * Adds actions to the plugins page for the iThemes Exchange CyberSource plugin
  *
  * @since 1.0.0
  *
@@ -26,7 +26,7 @@ function it_exchange_cybersource_plugin_row_actions( $actions, $plugin_file, $pl
 add_filter( 'plugin_action_links_exchange-addon-cybersource/exchange-addon-cybersource.php', 'it_exchange_cybersource_plugin_row_actions', 10, 4 );
 
 /**
- * Enqueues any scripts we need on the frontend during a Cybersource checkout
+ * Enqueues any scripts we need on the frontend during a CyberSource checkout
  *
  * @since 1.0.0
  *
@@ -34,7 +34,7 @@ add_filter( 'plugin_action_links_exchange-addon-cybersource/exchange-addon-cyber
 */
 function it_exchange_cybersource_addon_enqueue_script() {
     wp_enqueue_script( 'cybersource-addon-js', ITUtility::get_url_from_file( dirname( __FILE__ ) ) . '/js/cybersource-addon.js', array( 'jquery' ) );
-    wp_localize_script( 'cybersource-addon-js', 'CybersourceAddonL10n', array(
+    wp_localize_script( 'cybersource-addon-js', 'CyberSourceAddonL10n', array(
             'processing_payment_text' => __( 'Processing payment, please wait...', 'it-l10n-exchange-addon-cybersource' ),
         )
     );
@@ -42,7 +42,7 @@ function it_exchange_cybersource_addon_enqueue_script() {
 add_action( 'wp_enqueue_scripts', 'it_exchange_cybersource_addon_enqueue_script' );
 
 /**
- * Grab the Cybersource customer ID for a WP user
+ * Grab the CyberSource customer ID for a WP user
  *
  * @since 1.0.0
  *
@@ -57,12 +57,12 @@ function it_exchange_cybersource_addon_get_customer_id( $customer_id ) {
 }
 
 /**
- * Add the Cybersource customer ID as user meta on a WP user
+ * Add the CyberSource customer ID as user meta on a WP user
  *
  * @since 1.0.0
  *
  * @param integer $customer_id the WP user ID
- * @param integer $cybersource_id the Cybersource customer ID
+ * @param integer $cybersource_id the CyberSource customer ID
  * @return boolean
 */
 function it_exchange_cybersource_addon_set_customer_id( $customer_id, $cybersource_id ) {
@@ -73,11 +73,11 @@ function it_exchange_cybersource_addon_set_customer_id( $customer_id, $cybersour
 }
 
 /**
- * Grab a transaction from the Cybersource transaction ID
+ * Grab a transaction from the CyberSource transaction ID
  *
  * @since 1.0.0
  *
- * @param integer $cybersource_id id of Cybersource transaction
+ * @param integer $cybersource_id id of CyberSource transaction
  * @return transaction object
 */
 function it_exchange_cybersource_addon_get_transaction_id( $cybersource_id ) {
@@ -90,11 +90,11 @@ function it_exchange_cybersource_addon_get_transaction_id( $cybersource_id ) {
 }
 
 /**
- * Updates a Cybersource transaction status based on Cybersource ID
+ * Updates a CyberSource transaction status based on CyberSource ID
  *
  * @since 1.0.0
  *
- * @param integer $cybersource_id id of Cybersource transaction
+ * @param integer $cybersource_id id of CyberSource transaction
  * @param string $new_status new status
  * @return void
 */
@@ -108,13 +108,13 @@ function it_exchange_cybersource_addon_update_transaction_status( $cybersource_i
 }
 
 /**
- * Adds a refund to post_meta for a Cybersource transaction
+ * Adds a refund to post_meta for a CyberSource transaction
  *
  * @since 1.0.0
 */
 function it_exchange_cybersource_addon_add_refund_to_transaction( $cybersource_id, $refund ) {
 
-    // Cybersource money format comes in as cents. Divide by 100.
+    // CyberSource money format comes in as cents. Divide by 100.
     $refund = ( $refund / 100 );
 
     // Grab transaction
@@ -128,7 +128,7 @@ function it_exchange_cybersource_addon_add_refund_to_transaction( $cybersource_i
             $refunded_amount += $refund_meta['amount'];
         }
 
-        // In Cybersource the Refund is the total amount that has been refunded, not just this transaction
+        // In CyberSource the Refund is the total amount that has been refunded, not just this transaction
         $this_refund = $refund - $refunded_amount;
 
         // This refund is already formated on the way in. Don't reformat.
@@ -137,11 +137,11 @@ function it_exchange_cybersource_addon_add_refund_to_transaction( $cybersource_i
 }
 
 /**
- * Removes a Cybersource Customer ID from a WP user
+ * Removes a CyberSource Customer ID from a WP user
  *
  * @since 1.0.0
  *
- * @param integer $cybersource_id the id of the Cybersource transaction
+ * @param integer $cybersource_id the id of the CyberSource transaction
 */
 function it_exchange_cybersource_addon_delete_id_from_customer( $cybersource_id ) {
     $settings = it_exchange_get_option( 'addon_cybersource' );
@@ -179,10 +179,12 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 		'description' => $transaction_object->description,
 	);
 
-	$url = 'https://api-3t.paypal.com/nvp';
+	$url = 'https://ics2ws.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.26.wsdl';
+	$security_key = $settings[ 'cybersource_live_security_key' ];
 
 	if ( $settings[ 'cybersource_sandbox_mode' ] ) {
-		$url = 'https://api-3t.sandbox.paypal.com/nvp';
+		$url = 'https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor/CyberSourceTransaction_1.26.wsdl';
+		$security_key = $settings[ 'cybersource_test_security_key' ];
 	}
 
 	$total = $transaction_object->total;
@@ -243,8 +245,6 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 	// @todo Handle taxes?
 	// $post_data[ 'L_TAXAMT' . $item_count ] = 0;*/
 
-	$item_count = 0;
-
 	foreach ( $transaction_object->products as $product ) {
 		$price = $product[ 'product_subtotal' ]; // base price * quantity, w/ any changes by plugins
 		$price = $price / $product[ 'count' ]; // get final base price (possibly different from $product[ 'product_base_price' ])
@@ -265,27 +265,160 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 		$item_count++;
 	}
 
-	$args = array(
-		'method' => 'POST',
-		'body' => $post_data,
-		'user-agent' => 'iThemes Exchange',
-		'timeout' => 90,
-		'sslverify' => false
-	);
+	$request = new stdClass();
 
-	$response = wp_remote_request( $url, $args );
+	$request->merchantID = $this->get_merchant_id();
 
-	if ( is_wp_error( $response ) ) {
-		// @todo Show error message
+	$request->merchantReferenceCode = ltrim( $order->get_order_number(), _x( '#', 'hash before order number', 'woocommerce' ) );
+
+	$request->clientLibrary = "PHP";
+	$request->clientLibraryVersion = phpversion();
+	$request->clientEnvironment = php_uname();
+
+	// always authorize
+	$cc_auth_service = new stdClass();
+	$cc_auth_service->run = "true";
+	$request->ccAuthService = $cc_auth_service;
+
+	// capture?
+	if ( 'AUTH_CAPTURE' == $this->salemethod ) {
+		$cc_capture_service = new stdClass();
+		$cc_capture_service->run = "true";
+		$request->ccCaptureService = $cc_capture_service;
 	}
 
-	$body = wp_remote_retrieve_body( $response );
+	$bill_to = new stdClass();
+	$bill_to->firstName   = $order->billing_first_name;
+	$bill_to->lastName    = $order->billing_last_name;
+	$bill_to->company     = $order->billing_company;
+	$bill_to->street1     = $order->billing_address_1;
+	$bill_to->street2     = $order->billing_address_2;
+	$bill_to->city        = $order->billing_city;
+	$bill_to->state       = $order->billing_state;
+	$bill_to->postalCode  = $order->billing_postcode;
+	$bill_to->country     = $order->billing_country;
+	$bill_to->phoneNumber = $order->billing_phone;
+	$bill_to->email       = $order->billing_email;
+	if ( $order->user_id ) $bill_to->customerID = $order->user_id;
+	$request->billTo = $bill_to;
 
-	if ( empty( $body ) ) {
-		// @todo Show error message
+	$card = new stdClass();
+	$card->accountNumber   = $this->get_post( 'cybersource_accountNumber' );
+	$card->expirationMonth = $this->get_post( 'cybersource_expirationMonth' );
+	$card->expirationYear  = $this->get_post( 'cybersource_expirationYear' );
+	$card->cvNumber        = $this->get_post( 'cybersource_cvNumber' );
+	$card->cardType        = $this->get_post( 'cybersource_cardType' );
+	$request->card = $card;
+
+	$purchase_totals = new stdClass();
+	$purchase_totals->currency = get_woocommerce_currency();
+	$purchase_totals->grandTotalAmount = $order->get_total();
+	$request->purchaseTotals  = $purchase_totals;
+
+	$items = array();
+	foreach ( $order->get_items() as $order_item ) {
+		$item = new stdClass();
+		$item->unitPrice = $order_item['line_subtotal'] / $order_item['qty'];  // TODO: best way to get the item price?
+		$item->quantity  = $order_item['qty'];
+		$item->id        = count( $items );
+
+		$items[] = $item;
 	}
 
-	parse_str( $body, $api_response );
+	if ( ! empty( $items ) ) $request->item = $items;
+
+	try {
+		// Setup client
+		$cybersource_soap = @new CyberSource_SoapClient( $url );
+
+		// Set credentials
+		$cybersource_soap->set_credentials( $settings[ 'cybersource_merchant_id' ], $security_key );
+
+		// Make request
+		$response = $cybersource_soap->runTransaction( $request );
+	}
+	catch ( SoapFault $e ) {
+		// $e->getMessage();
+	}
+
+	// store the payment information in the order, regardless of success or failure
+	update_post_meta( $order->id, '_cybersource_request_id',            $response->requestID );
+	update_post_meta( $order->id, '_cybersource_orderpage_environment', $this->is_test_mode() ? 'TEST' : 'PRODUCTION' );
+	update_post_meta( $order->id, '_cybersource_card_type',             isset( $request->card->cardType ) ? $this->card_type_options[ $request->card->cardType ] : '' );
+	update_post_meta( $order->id, '_cybersource_card_last4',            isset( $request->card->accountNumber ) ? substr( $request->card->accountNumber, -4 ) : '' );
+	update_post_meta( $order->id, '_cybersource_card_expiration',       isset( $request->card->expirationMonth ) && isset( $request->card->expirationYear ) ? $request->card->expirationMonth . '/' . $request->card->expirationYear : '' );
+
+	// needed for creating the transaction URL
+	$order->order_custom_fields['_cybersource_request_id'][0]            = $response->requestID;
+	$order->order_custom_fields['_cybersource_orderpage_environment'][0] = $this->is_test_mode() ? 'TEST' : 'PRODUCTION';
+
+	if ( 'ACCEPT' == $response->decision ) {
+
+		// Successful payment:
+		$order_note = $this->is_test_mode() ?
+						__( 'TEST MODE Credit Card Transaction Approved: %s ending in %s (%s)', WC_Cybersource::TEXT_DOMAIN ) :
+						__( 'Credit Card Transaction Approved: %s ending in %s (%s)', WC_Cybersource::TEXT_DOMAIN );
+		$order->add_order_note( sprintf( $order_note,
+										$this->card_type_options[ $request->card->cardType ], substr( $request->card->accountNumber, -4 ), $request->card->expirationMonth . '/' . $request->card->expirationYear ) );
+		$order->payment_complete();
+
+	} elseif ( 'REVIEW' == $response->decision ) {
+
+		// Transaction requires review:
+
+		// admin message
+		$error_message = "";
+		if ( 230 == $response->reasonCode ) $error_message = __( "The authorization request was approved by the issuing bank but declined by CyberSource because it did not pass the CVN check.  You must log into your CyberSource account and decline or settle the transaction.", WC_Cybersource::TEXT_DOMAIN );
+		if ( $error_message ) $error_message = " - " . $error_message;
+
+		// Mark on-hold
+		$order_note = sprintf( __( 'Transaction requires review: code %s%s', WC_Cybersource::TEXT_DOMAIN ), $response->reasonCode, $error_message );
+		if ( 'on-hold' != $order->status ) {
+			$order->update_status( 'on-hold', $order_note );
+		} else {
+			// otherwise, make sure we add the order note so we can detect when someone fails to check out multiple times
+			$order->add_order_note( $order_note );
+		}
+
+		// user message:
+		// specific messages based on reason code
+		if ( 230 == $response->reasonCode ) $woocommerce->add_error( __( "This order is being placed on hold for review due to an incorrect card verification number.  You may contact the store to complete the transaction.", WC_Cybersource::TEXT_DOMAIN ) );
+
+		// provide some default error message as needed
+		if ( 0 == $woocommerce->error_count() ) {
+			$woocommerce->add_error( __( "This order is being placed on hold for review.  You may contact the store to complete the transaction.", WC_Cybersource::TEXT_DOMAIN ) );
+		}
+
+	} else {
+
+		// Failure:
+		// admin error message, and set status to 'failed'
+		$order_note = __( 'CyberSource Credit Card payment failed', WC_Cybersource::TEXT_DOMAIN ) . ' (Reason Code: ' . $response->reasonCode . ').';
+		$order_note .= ' <a href="' . esc_url( $this->get_transaction_url( $order ) ) . '" target="_blank">' . __( 'View in CyberSource', WC_Cybersource::TEXT_DOMAIN ) . '</a>';
+
+		$this->order_failed( $order, $order_note );
+
+		// user error message
+		if ( 202 == $response->reasonCode ) $woocommerce->add_error( __( "The provided card is expired, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 203 == $response->reasonCode ) $woocommerce->add_error( __( "The provided card was declined, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 204 == $response->reasonCode ) $woocommerce->add_error( __( "Insufficient funds in account, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 208 == $response->reasonCode ) $woocommerce->add_error( __( "The card is inactivate or not authorized for card-not-present transactions, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 210 == $response->reasonCode ) $woocommerce->add_error( __( "The credit limit for the card has been reached, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 211 == $response->reasonCode ) $woocommerce->add_error( __( "The card verification number is invalid, please try again.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 231 == $response->reasonCode ) $woocommerce->add_error( __( "The provided card number was invalid, or card type was incorrect.  Please try again.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 232 == $response->reasonCode ) $woocommerce->add_error( __( "That card type is not accepted, please use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+		if ( 240 == $response->reasonCode ) $woocommerce->add_error( __( "The card type is invalid or does not correlate with the credit card number.  Please try again or use an alternate card or other form of payment.", WC_Cybersource::TEXT_DOMAIN ) );
+
+		// provide some default error message
+		if ( 0 == $woocommerce->error_count() ) {
+			// decision will be ERROR or REJECT
+			if ( 'ERROR' == $response->decision ) $woocommerce->add_error( __( "An error occurred, please try again or try an alternate form of payment", WC_Cybersource::TEXT_DOMAIN ) );
+			else $woocommerce->add_error( __( "We cannot process your order with the payment information that you provided.  Please use a different payment account or an alternate payment method.", WC_Cybersource::TEXT_DOMAIN ) );
+		}
+
+		// done, stay on page and display any messages
+		return;
+	}
 
 	$status = strtolower( $api_response[ 'ACK' ] );
 

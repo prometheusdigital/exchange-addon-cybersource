@@ -1,8 +1,8 @@
 <?php
 /*
- * Plugin Name: iThemes Exchange - Cybersource Add-on
+ * Plugin Name: iThemes Exchange - CyberSource Add-on
  * Version: 1.0.0
- * Description: Adds the ability for users to checkout with Cybersource.
+ * Description: Adds the ability for users to checkout with CyberSource.
  * Plugin URI: http://ithemes.com/exchange/cybersource/
  * Author: WebDevStudios
  * Author URI: http://webdevstudios.com
@@ -17,14 +17,14 @@
 */
 
 /**
- * This registers our plugin as a Cybersource addon
+ * This registers our plugin as a CyberSource addon
  *
  * @since 1.0.0
 */
 function it_exchange_register_cybersource_addon() {
 	$options = array(
-		'name'              => __( 'Cybersource', 'it-l10n-exchange-addon-cybersource' ),
-		'description'       => __( 'Process transactions via Cybersource.', 'it-l10n-exchange-addon-cybersource' ),
+		'name'              => __( 'CyberSource', 'it-l10n-exchange-addon-cybersource' ),
+		'description'       => __( 'Process transactions via CyberSource.', 'it-l10n-exchange-addon-cybersource' ),
 		'author'            => 'WebDevStudios',
 		'author_url'        => 'http://webdevstudios.com',
 		'icon'              => ITUtility::get_url_from_file( dirname( __FILE__ ) . '/lib/images/cybersource50px.png' ),

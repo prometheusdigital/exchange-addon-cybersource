@@ -2,18 +2,18 @@
 /**
  * Most Payment Gateway APIs use some concept of webhooks or notifications to communicate with
  * clients. While add-ons are not required to use the Exchange API, we have created a couple of functions
- * to register and listen for these webooks. The Cybersource add-on uses this API and we have placed the
+ * to register and listen for these webooks. The CyberSource add-on uses this API and we have placed the
  * registering and processing functions in this file.
 */
 
 /*
- * Adds the Cybersource webhook key to the global array of keys to listen for
+ * Adds the CyberSource webhook key to the global array of keys to listen for
  *
  * If your add-on wants to use our API for listening and initing webhooks,
  * You'll need to register it by using the following API method
  * - it_exchange_register_webhook( $key, $param );
  * The first param is your addon-slug. The second param is the REQUEST key
- * Exchange will listen for (we've just passed it through a filter for Cybersource).
+ * Exchange will listen for (we've just passed it through a filter for CyberSource).
  *
  * @since 0.1.0
  *
@@ -28,7 +28,7 @@ function it_exchange_cybersource_addon_register_webhook_key() {
 add_filter( 'init', 'it_exchange_cybersource_addon_register_webhook_key' );
 
 /**
- * Processes webhooks for Cybersource
+ * Processes webhooks for CyberSource
  *
  * This function gets called when Exchange detects an incoming request
  * from the payment gateway. It recognizes the request because we registerd it above.

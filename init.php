@@ -1,7 +1,7 @@
 <?php
 /**
- * iThemes Exchange Cybersource Add-on
- * @package IT_Exchange_Addon_Cybersource
+ * iThemes Exchange CyberSource Add-on
+ * @package IT_Exchange_Addon_CyberSource
  * @since 1.0.0
 */
 
@@ -23,8 +23,8 @@ include( 'lib/required-hooks.php' );
 include( 'lib/addon-settings.php' );
 
 /**
- * The following file contains utility functions specific to our Cybersource add-on
+ * The following file contains utility functions specific to our CyberSource add-on
  * If you're building your own transaction-method addon, it's likely that you will
- * need to do similar things. This includes enqueueing scripts, formatting data for Cybersource, etc.
+ * need to do similar things. This includes enqueueing scripts, formatting data for CyberSource, etc.
 */
 include( 'lib/addon-functions.php' );
