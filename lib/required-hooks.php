@@ -19,7 +19,7 @@
  * @param string $url transaction URL
 */
 function it_exchange_refund_url_for_cybersource( $url ) {
-	return 'https://www.paypal.com/';
+	return 'http://www.cybersource.com/';
 }
 add_filter( 'it_exchange_refund_url_for_cybersource', 'it_exchange_refund_url_for_cybersource' );
 
@@ -92,26 +92,7 @@ function it_exchange_cybersource_addon_make_payment_button( $options ) {
     if ( 0 >= it_exchange_get_cart_total( false ) )
         return '';
 
-    $general_settings = it_exchange_get_option( 'settings_general' );
-    $cybersource_settings = it_exchange_get_option( 'addon_cybersource' );
-
-    $payment_form = '<form class="cybersource_form" action="' . esc_attr( it_exchange_get_page_url( 'transaction' ) ) . '" method="post">';
-    $payment_form .= '<input type="hidden" name="it-exchange-transaction-method" value="cybersource" />';
-    $payment_form .= wp_nonce_field( 'cybersource-checkout', '_cybersource_nonce', true, false );
-
-    $payment_form .= '<div class="hide-if-no-js">';
-
-	$button = '<input type="submit" class="it-exchange-cybersource-payment-button" name="cybersource_purchase" value="' . esc_attr( $cybersource_settings['cybersource_purchase_button_label'] ) .'" />';
-
-	// Allow for an override of button input itself
-	$button = apply_filters( 'it_exchange_get_cybersource_make_payment_button_input', $button, $options, $cybersource_settings );
-
-	$payment_form .= $button;
-
-    $payment_form .= '</div>';
-    $payment_form .= '</form>';
-
-    return $payment_form;
+    return it_exchange_generate_purchase_dialog( 'cybersource' );
 }
 add_filter( 'it_exchange_get_cybersource_make_payment_button', 'it_exchange_cybersource_addon_make_payment_button', 10, 2 );
 

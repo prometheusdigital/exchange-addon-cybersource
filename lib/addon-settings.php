@@ -202,7 +202,7 @@ class IT_Exchange_CyberSource_Add_On {
                 <?php _e( 'To get CyberSource set up for use with Exchange, you\'ll need to add the following information from your CyberSource account.', 'it-l10n-exchange-addon-cybersource' ); ?>
             </p>
             <p>
-                <?php _e( 'Don\'t have a CyberSource account yet?', 'it-l10n-exchange-addon-cybersource' ); ?> <a href="https://www.paypal.com/webapps/mpp/paypal-payments-pro" target="_blank"><?php _e( 'Go set one up here', 'it-l10n-exchange-addon-cybersource' ); ?></a>.
+                <?php _e( 'Don\'t have a CyberSource account yet?', 'it-l10n-exchange-addon-cybersource' ); ?> <a href="http://www.cybersource.com/" target="_blank"><?php _e( 'Go set one up here', 'it-l10n-exchange-addon-cybersource' ); ?></a>.
             </p>
             <h4><?php _e( 'Fill out your CyberSource API Credentials', 'it-l10n-exchange-addon-cybersource' ); ?></h4>
             <p>
@@ -221,7 +221,7 @@ class IT_Exchange_CyberSource_Add_On {
                 <?php $form->add_password( 'cybersource_test_security_key' ); ?>
             </p>
             <p>
-                <label for="cybersource_test_security_key"><?php _e( 'Transaction Sale Method', 'it-l10n-exchange-addon-cybersource' ); ?></label>
+                <label for="cybersource_sale_method"><?php _e( 'Transaction Sale Method', 'it-l10n-exchange-addon-cybersource' ); ?></label>
 				<?php
 					$sale_methods = array(
 						'auth_capture' => __( 'Authorize and Capture - Charge the Credit Card for the total amount', 'it-l10n-exchange-addon-cybersource' ),
