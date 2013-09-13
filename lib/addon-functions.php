@@ -236,8 +236,6 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 		$shipping_address[ 'email' ] = $it_exchange_customer->data->user_email;
 	}
 
-	$item_count = 0;
-
 	$request = new stdClass();
 
 	$request->merchantID = $settings[ 'cybersource_merchant_id' ];
@@ -281,6 +279,8 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 
 	$items = array();
 
+	$item_count = 0;
+
 	foreach ( $transaction_object->products as $product ) {
 		$price = $product[ 'product_subtotal' ]; // base price * quantity, w/ any changes by plugins
 		$price = $price / $product[ 'count' ]; // get final base price (possibly different from $product[ 'product_base_price' ])
@@ -299,6 +299,8 @@ function it_exchange_cybersource_addon_do_payment( $it_exchange_customer, $trans
 			'unitPrice' => $price,
 			'quantity' => $product[ 'count' ]
 		);
+
+		$item_count++;
 	}
 
 	if ( !empty( $items ) ) {
