@@ -42,13 +42,14 @@ add_filter( 'it_exchange_refund_url_for_cybersource', 'it_exchange_refund_url_fo
 function it_exchange_cybersource_addon_process_transaction( $status, $transaction_object ) {
 
 	// If this has been modified as true already, return.
-	if ( $status || !isset( $_REQUEST[ '_cybersource_nonce' ] ) ) {
+	if ( $status || !isset( $_REQUEST[ 'ite-cybersource-purchase-dialog-nonce' ] ) ) {
+
 		return $status;
 	}
 
 	// Verify nonce
-	if ( empty( $_REQUEST[ '_cybersource_nonce' ] ) && !wp_verify_nonce( $_REQUEST[ '_cybersource_nonce' ], 'cybersource-checkout' ) ) {
-		it_exchange_add_message( 'error', __( 'Transaction Failed, unable to verify security token.', 'it-l10n-exchange-addon-cybersource' ) );
+	if ( empty( $_REQUEST[ 'ite-cybersource-purchase-dialog-nonce' ] ) && !wp_verify_nonce( $_REQUEST[ 'ite-cybersource-purchase-dialog-nonce' ], 'cybersource-checkout' ) ) {
+		it_exchange_add_message( 'error', __( 'Transaction Failed, unable to verify security token.', 'LION' ) );
 
 		return false;
 	}
@@ -111,19 +112,19 @@ add_filter( 'it_exchange_get_cybersource_make_payment_button', 'it_exchange_cybe
 function it_exchange_cybersource_addon_transaction_status_label( $status ) {
     switch ( $status ) {
         case 'succeeded':
-            return __( 'Paid', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Paid', 'LION' );
         case 'refunded':
-            return __( 'Refunded', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Refunded', 'LION' );
         case 'partial-refund':
-            return __( 'Partially Refunded', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Partially Refunded', 'LION' );
         case 'needs_response':
-            return __( 'Disputed: CyberSource needs a response', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Disputed: CyberSource needs a response', 'LION' );
         case 'under_review':
-            return __( 'Disputed: Under review', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Disputed: Under review', 'LION' );
         case 'won':
-            return __( 'Disputed: Won, Paid', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Disputed: Won, Paid', 'LION' );
         default:
-            return __( 'Unknown', 'it-l10n-exchange-addon-cybersource' );
+            return __( 'Unknown', 'LION' );
     }
 }
 add_filter( 'it_exchange_transaction_status_label_cybersource', 'it_exchange_cybersource_addon_transaction_status_label' );

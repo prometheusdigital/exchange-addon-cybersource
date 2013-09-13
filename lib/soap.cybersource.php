@@ -24,7 +24,12 @@ class CyberSource_SoapClient extends SoapClient {
 	 */
 	public function __construct( $wsdl, array $options = null ) {
 
-		parent::__construct( $wsdl, $options );
+		if ( is_array( $options ) ) {
+			parent::__construct( $wsdl, $options );
+		}
+		else {
+			parent::__construct( $wsdl );
+		}
 
 	}
 
@@ -51,7 +56,7 @@ class CyberSource_SoapClient extends SoapClient {
 	 *
 	 * @return string
 	 */
-	public function __doRequest( $request, $location, $action, $version ) {
+	public function __doRequest( $request, $location, $action, $version, $one_way = null ) {
 
 		// Build SOAP header
 		$soap_header = '<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">'
@@ -66,8 +71,21 @@ class CyberSource_SoapClient extends SoapClient {
 		// Send SOAP header with Username / Password
 		$soap_header = sprintf( $soap_header, $this->username, $this->password );
 
-		// Add to top of request
-		$request = $soap_header . $request;
+		$request_dom     = new DOMDocument( '1.0' );
+		$soap_header_dom = new DOMDocument( '1.0' );
+
+		try {
+			$request_dom->loadXML( $request );
+			$soap_header_dom->loadXML( $soap_header );
+
+			$node = $request_dom->importNode( $soap_header_dom->firstChild, true );
+			$request_dom->firstChild->insertBefore( $node, $request_dom->firstChild->firstChild );
+
+			$request = $request_dom->saveXML();
+		}
+		catch ( DOMException $e ) {
+			throw new Exception ( $e->getMessage() );
+		}
 
 		// Proceed as planned
 		return parent::__doRequest( $request, $location, $action, $version );
