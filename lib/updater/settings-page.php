@@ -332,7 +332,7 @@ class Ithemes_Updater_Settings_Page {
 			</table>
 
 			<p class="submit">
-				<input id="save_settings" class="button button-primary" type="submit" value="<?php _e( 'Save Settings', 'it-l10n-exchange' ); ?>" />
+				<input id="save_settings" class="button button-primary" type="submit" value="<?php esc_attr_e( 'Save Settings', 'it-l10n-exchange' ); ?>" />
 				<input type="hidden" name="action" value="save_settings" />
 			</p>
 		</div>
@@ -452,7 +452,7 @@ class Ithemes_Updater_Settings_Page {
 						<td colspan="6">
 							<input type="text" name="it-updater-username" placeholder="iThemes Username" value="<?php echo esc_attr( $post_data['username'] ); ?>" autocomplete="off" />
 							<input type="password" name="it-updater-password" placeholder="Password" value="<?php echo esc_attr( $post_data['password'] ); ?>" />
-							<input class="button-primary" type="submit" name="submit" value="<?php _e( 'Remove Licenses', 'it-l10n-exchange' ); ?>" />
+							<input class="button-primary" type="submit" name="submit" value="<?php esc_attr_e( 'Remove Licenses', 'it-l10n-exchange' ); ?>" />
 							<input type="hidden" name="action" value="unlicense_packages" />
 						</td>
 					</tr>
@@ -535,7 +535,7 @@ class Ithemes_Updater_Settings_Page {
 						<td colspan="2">
 							<input type="text" name="it-updater-username" placeholder="iThemes Username" value="<?php echo esc_attr( $post_data['username'] ); ?>" autocomplete="off" />
 							<input type="password" name="it-updater-password" placeholder="Password" value="<?php echo esc_attr( $post_data['password'] ); ?>" />
-							<input class="button-primary" type="submit" name="submit" value="<?php _e( 'License Products', 'it-l10n-exchange' ); ?>" />
+							<input class="button-primary" type="submit" name="submit" value="<?php esc_attr_e( 'License Products', 'it-l10n-exchange' ); ?>" />
 							<input type="hidden" name="action" value="license_packages" />
 						</td>
 					</tr>
