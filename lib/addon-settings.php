@@ -181,6 +181,9 @@ class IT_Exchange_CyberSource_Add_On {
 
     /**
      * Builds Settings Form Table
+	 *
+	 * @param ITForm $form
+	 * @param array $settings
      *
      * @since 1.0.0
      */
@@ -207,18 +210,18 @@ class IT_Exchange_CyberSource_Add_On {
             <h4><?php _e( 'Fill out your CyberSource API Credentials', 'LION' ); ?></h4>
             <p>
                 <label for="cybersource_merchant_id"><?php _e( 'Merchant ID', 'LION' ); ?>
-					<span class="tip" title="<?php _e( 'This is the same merchant ID you use to log into the CyberSource Business Center.', 'LION' ); ?>">i</span></label>
+					<span class="tip" title="<?php esc_attr_e( 'This is the same merchant ID you use to log into the CyberSource Business Center.', 'LION' ); ?>">i</span></label>
                 <?php $form->add_text_box( 'cybersource_merchant_id' ); ?>
             </p>
             <p>
                 <label for="cybersource_live_security_key"><?php _e( 'Live Transaction Security Key', 'LION' ); ?>
-					<span class="tip" title="<?php _e( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'LION' ); ?>">i</span></label>
-                <?php $form->add_password( 'cybersource_live_security_key' ); ?>
+					<span class="tip" title="<?php esc_attr_e( 'You can find this by logging into your "Live" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'LION' ); ?>">i</span></label>
+                <?php $form->add_text_area( 'cybersource_live_security_key' ); ?>
             </p>
             <p>
                 <label for="cybersource_test_security_key"><?php _e( 'Test Transaction Security Key', 'LION' ); ?>
-					<span class="tip" title="<?php _e( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'LION' ); ?>">i</span></label>
-                <?php $form->add_password( 'cybersource_test_security_key' ); ?>
+					<span class="tip" title="<?php esc_attr_e( 'You can find this by logging into your "Test" CyberSource Business Center, going to Account Management &gt; Transaction Security Keys &gt; Security Keys for the SOAP Toolkit API, and then click \'Generate\'.', 'LION' ); ?>">i</span></label>
+                <?php $form->add_text_area( 'cybersource_test_security_key' ); ?>
             </p>
             <p>
                 <label for="cybersource_sale_method"><?php _e( 'Transaction Sale Method', 'LION' ); ?></label>
@@ -236,13 +239,13 @@ class IT_Exchange_CyberSource_Add_On {
             <p class="hide-if-wizard">
                 <?php $form->add_check_box( 'cybersource_sandbox_mode', array( 'class' => 'show-test-mode-options' ) ); ?>
                 <label for="cybersource_sandbox_mode"><?php _e( 'Enable CyberSource Sandbox Mode?', 'LION' ); ?>
-					<span class="tip" title="<?php _e( 'Use this mode for testing your store. This mode will need to be disabled when the store is ready to process customer payments.', 'LION' ); ?>">i</span></label>
+					<span class="tip" title="<?php esc_attr_e( 'Use this mode for testing your store. This mode will need to be disabled when the store is ready to process customer payments.', 'LION' ); ?>">i</span></label>
             </p>
 
             <h4><?php _e( 'Optional: Edit Purchase Button Label', 'LION' ); ?></h4>
             <p>
                 <label for="cybersource_purchase_button_label"><?php _e( 'Purchase Button Label', 'LION' ); ?>
-					<span class="tip" title="<?php _e( 'This is the text inside the button your customers will press to purchase with CyberSource', 'LION' ); ?>">i</span></label>
+					<span class="tip" title="<?php esc_attr_e( 'This is the text inside the button your customers will press to purchase with CyberSource', 'LION' ); ?>">i</span></label>
                 <?php $form->add_text_box( 'cybersource_purchase_button_label' ); ?>
             </p>
         </div>
