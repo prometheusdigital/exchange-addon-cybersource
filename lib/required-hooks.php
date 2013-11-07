@@ -93,7 +93,10 @@ function it_exchange_cybersource_addon_make_payment_button( $options ) {
     if ( 0 >= it_exchange_get_cart_total( false ) )
         return '';
 
-    return it_exchange_generate_purchase_dialog( 'cybersource' );
+	$settings = it_exchange_get_option( 'addon_cybersource' );
+
+    return it_exchange_generate_purchase_dialog( 'cybersource', array( 'purchase-label' => $settings[ 'cybersource_purchase_button_label' ] ) );
+
 }
 add_filter( 'it_exchange_get_cybersource_make_payment_button', 'it_exchange_cybersource_addon_make_payment_button', 10, 2 );
 
