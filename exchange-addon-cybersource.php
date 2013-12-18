@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: iThemes Exchange - CyberSource Add-on
- * Version: 1.0.2
+ * Version: 1.0.3
  * Description: Adds the ability for users to checkout with CyberSource.
  * Plugin URI: http://ithemes.com/exchange/cybersource/
  * Author: WebDevStudios
