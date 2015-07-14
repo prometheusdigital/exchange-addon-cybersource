@@ -18,3 +18,5 @@
 	Enhancement: Authenticating users now uses the new authentication system.
 1.0.7 - 2015-04-23 - Packaging Bot (lib/updater)
 	Compatibility Fix: Updated plugin and theme update data format to match changes in WordPress 4.2.
+1.0.8 - 2015-07-14 - Packaging Bot (lib/updater)
+	Enhancement: Updated link to iThemes support.
