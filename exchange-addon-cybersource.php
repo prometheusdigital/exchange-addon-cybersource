@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: ExchangeWP - CyberSource Add-on
- * Version: 1.0.8
+ * Version: 1.0.9
  * Description: Adds the ability for users to checkout with CyberSource.
  * Plugin URI: http://exchangewp.com/downloads/cybersource/
  * Author: ExchangeWP
