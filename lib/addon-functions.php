@@ -6,7 +6,7 @@
 */
 
 /**
- * Adds actions to the plugins page for the iThemes Exchange CyberSource plugin
+ * Adds actions to the plugins page for the ExchangeWP CyberSource plugin
  *
  * @since 1.0.0
  *

@@ -1,6 +1,6 @@
 <?php
 /**
- * iThemes Exchange CyberSource Add-on
+ * ExchangeWP CyberSource Add-on
  * @package IT_Exchange_Addon_CyberSource
  * @since 1.0.0
 */
