@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: ExchangeWP - CyberSource Add-on
- * Version: 1.0.9
+ * Version: 1.0.10
  * Description: Adds the ability for users to checkout with CyberSource.
  * Plugin URI: http://exchangewp.com/downloads/cybersource/
  * Author: ExchangeWP
@@ -78,34 +78,26 @@ function ithemes_exchange_addon_cybersource_updater_register( $updater ) {
 }
 add_action( 'ithemes_updater_register', 'ithemes_exchange_addon_cybersource_updater_register' );
 
-// require( dirname( __FILE__ ) . '/lib/updater/load.php' );
+function exchange_cybersource_plugin_updaer() {
 
-if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) )  {
-	require_once 'EDD_SL_Plugin_Updater.php';
-}
+	$license_check = get_transient( 'exchangewp_license_check' );
 
-function exchange_cybersource_plugin_updater() {
+	if ($license_check->license == 'valid' ) {
+		$license_key = it_exchange_get_option( 'exchangewp_licenses' );
+		$license = $license_key['exchange_license'];
 
-	// retrieve our license key from the DB
-	// this is going to have to be pulled from a seralized array to get the actual key.
-	// $license_key = trim( get_option( 'exchange_cybersource_license_key' ) );
-	$exchangewp_cybersource_options = get_option( 'it-storage-exchange_addon_cybersource' );
-	$license_key = $exchangewp_cybersource_options['cybersource_license'];
-
-	// setup the updater
-	$edd_updater = new EDD_SL_Plugin_Updater( 'https://exchangewp.com', __FILE__, array(
-			'version' 		=> '1.0.9', 				// current version number
-			'license' 		=> $license_key, 		// license key (used get_option above to retrieve from DB)
-			'item_name' 	=> 'cybersource', 	  // name of this plugin
-			'author' 	  	=> 'ExchangeWP',    // author of this plugin
-			'url'       	=> home_url(),
-			'wp_override' => true,
-			'beta'		  	=> false
-		)
-	);
-	// var_dump($edd_updater);
-	// die();
+		$edd_updater = new EDD_SL_Plugin_Updater( 'https://exchangewp.com', __FILE__, array(
+				'version' 		=> '1.0.10', 				// current version number
+				'license' 		=> $license, 				// license key (used get_option above to retrieve from DB)
+				'item_id'		 	=> 422,					 	  // name of this plugin
+				'author' 	  	=> 'ExchangeWP',    // author of this plugin
+				'url'       	=> home_url(),
+				'wp_override' => true,
+				'beta'		  	=> false
+			)
+		);
+	}
 
 }
 
-add_action( 'admin_init', 'exchange_cybersource_plugin_updater', 0 );
+add_action( 'admin_init', 'exchange_cybersource_plugin_updaer', 0 );
